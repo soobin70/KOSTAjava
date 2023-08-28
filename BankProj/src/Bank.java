@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 import acc.Account;
 import acc.SpecialAccount;
+import exc.BankError;
+import exc.BankException;
 
 public class Bank {
 	Account[] accs = new Account[100];
@@ -10,7 +12,7 @@ public class Bank {
 	
 	
 	
-	int menu() throws Exception {
+	int menu() throws BankException {
 		System.out.println("[코스타 은행]");
 		System.out.println("1.계좌설정");
 		System.out.println("2. 입금");		
@@ -19,20 +21,35 @@ public class Bank {
 		System.out.println("5. 전체계좌조회");
 		System.out.println("0. 종료");
 		System.out.println("선택>>");			
-		int sel =0;
-//		try {
-			return Integer.parseInt(sc.nextLine());
-//		}catch(NumberFormatException e){}
-//		return sel;
+		int sel =Integer.parseInt(sc.nextLine());
+		if(!(sel>=0&&sel<=5)) {
+
+			//     	try {
+			throw new BankException("메뉴오류",BankError.MENU);
+//		}catch(BankException e){
+//			System.out.println(e);
+//			menu();
+//			}
+		}
+		return sel;
 	}
-	void selAccMEnu() {
+	void selAccMenu()throws BankException {
 		System.out.println("[계좌개설]");
 		System.out.println("1.일반계좌");
 		System.out.println("2.특수계좌");
 		System.out.print("선택>>");
 		int sel = Integer.parseInt(sc.nextLine());
-		if(sel==1) makeAccount();
-		else makeSpecialAccount();
+		switch(sel) {
+		case 1: makeAccount(); break;
+		case 2:makeSpecialAccount();
+		default : 
+//			try {
+				throw new BankException("메뉴오류", BankError.MENU);
+//				}catch(BankException e) {
+//						System.out.println(e);
+//						selAccMenu();
+//						}
+					}	
 	}
 	void makeAccount() {
 		System.out.println("[일반계좌 개설]");
@@ -77,16 +94,13 @@ public class Bank {
 		 }
 		 return null;
 	 }
-	void deposit() {
+	void deposit() throws BankException {
 		System.out.println("[입금]");
 		System.out.print("계좌번호");
 		String id = sc.nextLine();
-		System.out.print("입금액");
-		Account acc = searchAccById(id);
-		if(acc==null) {
-			System.out.println("계좌번호가 틀립니다");
-			return;
-		}
+		Account acc = searchAccById(id);		
+		if(acc==null) throw new BankException("계좌오류", BankError.NOID);
+				
 		System.out.print("입금액");
 		int money = Integer.parseInt(sc.nextLine());
 		acc.deposit(money);
@@ -96,9 +110,11 @@ public class Bank {
 		System.out.print("계좌번호");
 		String id = sc.nextLine();
 		Account acc = searchAccById(id);
-		if(acc==null) {
-			System.out.println("계좌번호가 틀립니다");
-			return;
+		try {
+		if(acc==null)throw new BankException("계좌번호가 틀립니다",BankError.NOID); 
+		}catch(BankException e) {
+			System.out.println(e);
+			withdraw();
 		}
 		System.out.print("출금액");
 		int money = Integer.parseInt(sc.nextLine());
@@ -109,9 +125,11 @@ public class Bank {
 		System.out.print("계좌번호");
 		String id = sc.nextLine();
 		Account acc = searchAccById(id);
-		if(acc==null) {
-			System.out.println("계좌번호가 틀립니다");
-			return;
+		try {
+			if(acc==null)throw new BankException("계좌번호가 틀립니다", BankError.NOID);
+		}catch(BankException e) {
+			System.out.println(e);
+			accountInfo();
 		}
 		System.out.println(acc.info());
 		
@@ -126,24 +144,37 @@ public class Bank {
 		// TODO Auto-generated method stub
 		Bank bank = new Bank();
 		int sel;
-		while(true) {
+		while (true) {
 			try {
-			sel = bank.menu();
-			if(sel==0)break;
-			switch(sel) {
-			
-			case 1: bank.selAccMEnu(); break;
-			case 2: bank.deposit(); break;
-			case 3: bank.withdraw(); break;
-			case 4: bank.accountInfo(); break;
-			case 5: bank.allAccountInfo(); break;
-			
-		
+				sel = bank.menu();
+				if (sel == 0)
+					break;
+				switch (sel) {
+
+				case 1:
+					bank.selAccMenu();
+					break;
+				case 2:
+					bank.deposit();
+					break;
+				case 3:
+					bank.withdraw();
+					break;
+				case 4:
+					bank.accountInfo();
+					break;
+				case 5:
+					bank.allAccountInfo();
+					break;
+
+				}
+
+			} catch (NumberFormatException e) {
+				System.out.println("입력형식이 맞지않습니다. 다시 선택하세요");
+
+			} catch (Exception e) {
+				System.out.println(e);
 			}
-		}catch(Exception e) {
-			System.out.println("입력 형식이 맞지 않습니다. 다시 선택하세요.");
 		}
-
-		}}
-
+	}
 }
