@@ -51,19 +51,17 @@ public class Bank {
 //						}
 					}	
 	}
-	void makeAccount() {
+	void makeAccount() throws BankException {
 		System.out.println("[일반계좌 개설]");
 		System.out.print("계좌번호: ");
 		String id = sc.nextLine();
 		Account acc = searchAccById(id);
 		if(acc!=null) {
-			System.out.println("계좌번호가 중복됩니다");
-			return;
+			throw new BankException("계좌오류", BankError.EXISTID);
 		}
 		System.out.print("이름 : ");
 		String name = sc.nextLine();
-		System.out.print("입금액:");
-		
+		System.out.print("입금액:");	
 		int money = Integer.parseInt(sc.nextLine());
 		accs[accCnt++]= new Account(id, name, money);
 		
@@ -105,7 +103,7 @@ public class Bank {
 		int money = Integer.parseInt(sc.nextLine());
 		acc.deposit(money);
 	}
-	void withdraw() {
+	void withdraw() throws BankException {
 		System.out.println("[출금]");
 		System.out.print("계좌번호");
 		String id = sc.nextLine();

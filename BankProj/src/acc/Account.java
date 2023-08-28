@@ -1,5 +1,7 @@
 package acc;
 
+import exc.BankError;
+import exc.BankException;
 
 public class Account {
 
@@ -35,12 +37,16 @@ public class Account {
 		//틀림,,,	//return  "계좌번호 : " + id +", 이름 : " +name+", 잔액:"+balance;
 		      return String.format("계좌번호:%s, 이름:%s , 잔액: %d", id, name, balance);
 		}
-		public void deposit(int money) {
+		public void deposit(int money)throws BankException {
+			if(money<=0){
+				throw new BankException("입금오류",BankError.MINUS);
+			}
 			balance += money;
 		}
-		public void withdraw(int money) {
-			if(balance>=money) {
-				balance-=money;
-			}
+		public void withdraw(int money)throws BankException {
+			if(balance<money) {
+				throw new BankException("출금 오류",BankError.LACK);
+			}	balance-=money;
+			
 		}
 }
