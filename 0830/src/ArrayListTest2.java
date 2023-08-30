@@ -10,6 +10,12 @@ public class ArrayListTest2 {
 		}
 		System.out.println();
 	}
+	static void print2(List<Person>list) {
+		for(Person n : list) {
+			System.out.print(n);
+		}
+		System.out.println();
+	}
 
 	public static void main(String[] args) {
 	   ArrayList<Integer> list1 = new ArrayList<>();
@@ -34,6 +40,7 @@ public class ArrayListTest2 {
 	   list3.add(new Person("song",20));
 	   list3.add(new Person("gong",25));
 	   Collections.sort(list3);
+	   print2(list3);
 	
 	
 	}
