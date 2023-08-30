@@ -18,6 +18,17 @@ class Person implements Comparable<Person>{
 		return name.compareTo(o.name);
 	
 	}
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Person == false)return false;
+		Person p = (Person)obj;
+		return name.equals(p.name)&& age==p.age;
+	}
+	@Override
+	public int hashCode() {
+		return name.hashCode()+age;
+	}
+	
 	
 }
 
