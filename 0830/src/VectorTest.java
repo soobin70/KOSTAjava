@@ -15,6 +15,7 @@ public class VectorTest {
 		Enumeration<Integer> e = vector.elements();
 
 		while (e.hasMoreElements()) {
+			
 			System.out.println(e.nextElement());
 
 			ArrayList<Integer> list = new ArrayList<>();
