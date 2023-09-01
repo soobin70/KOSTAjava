@@ -11,7 +11,6 @@ public class TestMain03 {
 		StringTokenizer st = new StringTokenizer(str, ",");
 		List<String> list = new ArrayList<String>();
 		double sum = 0;
-		
 		String[] s = str.split(",");
 		for (int i = 0; i < s.length; i++) {
 			sum += Double.parseDouble(s[i]);

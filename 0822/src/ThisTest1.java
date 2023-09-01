@@ -14,6 +14,7 @@ class Account{
 	}
 
 }
+
 public class ThisTest1 {
 
 	public static void main(String[] args) {
