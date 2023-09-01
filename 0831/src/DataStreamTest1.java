@@ -5,10 +5,11 @@ import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-class Person {
+class Person implements Serializable{
    String name;
    int age;
    double height;
@@ -21,7 +22,39 @@ class Person {
       this.married = married;
    }
 
-   @Override
+   public String getName() {
+	return name;
+}
+
+public void setName(String name) {
+	this.name = name;
+}
+
+public int getAge() {
+	return age;
+}
+
+public void setAge(int age) {
+	this.age = age;
+}
+
+public double getHeight() {
+	return height;
+}
+
+public void setHeight(double height) {
+	this.height = height;
+}
+
+public boolean isMarried() {
+	return married;
+}
+
+public void setMarried(boolean married) {
+	this.married = married;
+}
+
+@Override
    public String toString() {
       return String.format("이름 : %s , 나이 : %d , 키 : %f , 결혼 : %s", name, age, height, (married ? "Y" : "N"));
    }
