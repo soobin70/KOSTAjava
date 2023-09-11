@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,13 +51,13 @@ public class TeamDAO {
          } catch (Exception e) {
             e.printStackTrace();
          }
-         close(conn);
-         return cnt;
       }
+      close(conn);
+      return cnt;
    }
 
    public static Team selectTeam(String teamName) {
-      Connection conn = null;
+      Connection conn = getConnection();
       PreparedStatement pstmt = null;
       ResultSet rs = null;
       Team team = null;
@@ -68,11 +67,11 @@ public class TeamDAO {
          pstmt.setString(1, teamName);
          rs = pstmt.executeQuery();
          if (rs != null && rs.next()) {
-            Integer num = rs.getInt("num");
-            String teamname = rs.getString("name");
-            String local = rs.getString("local");
-            team = new Team(num, teamName, local);
-//               강사님 team = new Team(rs.getInt("num"), rs.getString("name"), rs.getString("local"));
+//            Integer num = rs.getInt("num");
+//            String teamname = rs.getString("name");
+//            String local = rs.getString("local");
+//            team = new Team(num, teamName, local);
+              team = new Team(rs.getInt("num"), rs.getString("name"), rs.getString("local"));
          }
       } catch (Exception e) {
          e.printStackTrace(); // 예외 처리 필요

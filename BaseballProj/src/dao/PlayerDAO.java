@@ -49,9 +49,9 @@ public class PlayerDAO {
          } catch(Exception e) {
             e.printStackTrace();
          }
-         close(conn);
-         return cnt;
       }
+      close(conn);
+      return cnt;
    }
    
    public List<Player> selectPlayerByName(String name) {
@@ -194,7 +194,7 @@ public class PlayerDAO {
    
    public List<Player> selectPlayerByTeam(String teamName) {
       Connection conn = getConnection();
-      Player player = null;
+     
        PreparedStatement pstmt = null;
        ResultSet rs = null;
        String sql = "select p.num, p.name, p.backnum, p.teamnum, t.name "
