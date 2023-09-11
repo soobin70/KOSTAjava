@@ -22,7 +22,7 @@ public class BaseBallService {
       System.out.println("[팀 등록]");
       System.out.print("팀명:");
       String teamName = sc.nextLine();
-      System.out.println("연고지:");
+      System.out.print("연고지:");
       String local = sc.nextLine();
       teamDAO.insertTeam(new Team(null, teamName, local));
    }
@@ -32,14 +32,14 @@ public class BaseBallService {
       System.out.println("[팀 조회]");
       System.out.print("팀명: ");
       String teamName = sc.nextLine();
-      Team team = TeamDAO.selectTeam(teamName);
+      Team team = teamDAO.selectTeam(teamName);
       System.out.println(team);
    }
 
    // 팀 목록 조회
    public void teamListInfo() {
       System.out.println("[팀 조회]");
-      List<Team> teamList = TeamDAO.selectTeamList();
+      List<Team> teamList = teamDAO.selectTeamList();
       for (Team team : teamList) {
          System.out.println(team);
       }
@@ -55,13 +55,13 @@ public class BaseBallService {
 
       // 팀 선택
       System.out.println("팀 선택:");
-      List<Team> teamList = TeamDAO.selectTeamList();
+      List<Team> teamList = teamDAO.selectTeamList();
       for (Team team : teamList) {
          System.out.println(team.shortString());
       }
       System.out.print("선택>>");
       Integer teamNum = Integer.parseInt(sc.nextLine());
-      PlayerDAO.insertPlayer(new Player(null, playerName, backNum, teamNum, null));
+      playerDAO.insertPlayer(new Player(null, playerName, backNum, teamNum, null));
    }
 
    // 특정 선수 조회(이름으로)
@@ -83,7 +83,7 @@ public class BaseBallService {
       System.out.print("등 번호: ");
       Integer backnum = Integer.parseInt(sc.nextLine());
       // PlayerDAO에서 선수를 이름으로 조회하는 메서드 호출
-      List<Player> playerList = PlayerDAO.selectPlayerByBacknum(backnum);
+      List<Player> playerList = playerDAO.selectPlayerByBacknum(backnum);
       for (Player player : playerList) {
          System.out.println(player);
       }
