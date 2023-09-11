@@ -11,7 +11,8 @@ public class Goods {
 	
 	//제품 코드
 	private String code;
-	//제품 이private String name;
+	//제품 이름
+	private String name;
 	//제품 가격
 	private int price;
 	//제품 수량
@@ -21,10 +22,7 @@ public class Goods {
 	
 	//생성자 정의		
 	public Goods(String name, int price, int stock, String category) {
-		this.name= name;
-		this.price = price;
-		this.stock = stock;
-		this.category = category;
+		// 구현해야하는 부분 
 		
 		
 	}
@@ -63,8 +61,4 @@ public class Goods {
 
 	//구현해야 하는 부분
 	//toString override
-	@Override
-	public String toString() {
-		return String.format("제품이름:%s, 제품가격:%s, 제품수량:%d, 제품종류:%s");
-	}
 }

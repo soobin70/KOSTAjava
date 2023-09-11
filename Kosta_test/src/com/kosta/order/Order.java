@@ -18,9 +18,7 @@ public class Order {
 	
 	//생성자 정의	
 	public Order(String customer, String productCode, int amount) {
-		this.customer = customer;
-		this.productCode = productCode;
-		this.amount = amount;
+		//구현해야하는 부분
 		
 	}
 
@@ -58,9 +56,5 @@ public class Order {
 	
 	//구현해야 하는 부분
 	//toString override
-	@Override
-	public String toString() {
-		return String.format("고객명:%s, 주문상품:%s, 주문수량:%d");
-	}
 	
 }
